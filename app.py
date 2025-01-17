@@ -5,6 +5,7 @@ import time
 import pandas as pd
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+import io
 
 
 # ------------------------------------ MAIN APP ------------------------------------
@@ -118,6 +119,17 @@ def main():
                       st.session_state.aircraft_data.loc[i, "aircraft"], fill="white", font=font)
 
         img = np.array(pil_img)
+
+
+
+        # TEST
+        # Convert the PIL image to a byte buffer (to avoid file saving)
+        buf = io.BytesIO()
+        pil_img.save(buf, format="PNG")
+        byte_im = buf.getvalue()
+
+        
+        
     
         # Show the airspace radar
         airspace_container.image(img, channels="BGR", use_column_width=True)
