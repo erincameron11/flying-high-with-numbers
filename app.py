@@ -4,6 +4,7 @@ import random
 import time
 import pandas as pd
 import numpy as np
+import re
 # Import external files
 from helpers import *
 
@@ -31,7 +32,7 @@ def main():
     st.sidebar.title(":airplane: Flying High with Numbers")
     st.sidebar.divider()
     aircraft_nums = st.sidebar.text_area(
-        "Aircraft numbers (separated by a comma): "
+        "Aircraft Identifiers: "
     )
     speed = st.sidebar.slider("Speed", min_value=1, max_value=60, value=10, step=1)
     start = st.sidebar.button("Start", use_container_width=True)
@@ -54,8 +55,9 @@ def main():
         st.session_state.paused = False
         # Generate new aircraft data if none currently exists
         if st.session_state.aircraft_data.empty and aircraft_nums:
-            # Obtain each separate aircraft number
-            aircraft = [s.strip() for s in aircraft_nums.split(',')]
+            # Obtain each separate aircraft number (look for newline, whitespace, and comma characters)
+            # aircraft = [s.strip() for s in aircraft_nums.split(',')]
+            aircraft = [s.strip() for s in re.split(r'[\s,\n]+', aircraft_nums) if s.strip()]
             # Position the aircraft x, y coordinates and dx, dy on the canvas
             st.session_state.aircraft_data = pd.DataFrame({
                 "aircraft": aircraft,
