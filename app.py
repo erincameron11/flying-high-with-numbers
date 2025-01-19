@@ -30,7 +30,7 @@ def main():
     set_sidebar_width() # from helpers.py
     st.sidebar.title(":airplane: Flying High with Numbers")
     st.sidebar.divider()
-    aircraft_nums = st.sidebar.text_input(
+    aircraft_nums = st.sidebar.text_area(
         "Aircraft numbers (separated by a comma): "
     )
     speed = st.sidebar.slider("Speed", min_value=1, max_value=60, value=10, step=1)
