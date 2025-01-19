@@ -56,7 +56,6 @@ def main():
         # Generate new aircraft data if none currently exists
         if st.session_state.aircraft_data.empty and aircraft_nums:
             # Obtain each separate aircraft number (look for newline, whitespace, and comma characters)
-            # aircraft = [s.strip() for s in aircraft_nums.split(',')]
             aircraft = [s.strip() for s in re.split(r'[\s,\n]+', aircraft_nums) if s.strip()]
             # Position the aircraft x, y coordinates and dx, dy on the canvas
             st.session_state.aircraft_data = pd.DataFrame({
