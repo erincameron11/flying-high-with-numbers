@@ -4,6 +4,25 @@ import streamlit as st
 
 
 # ------------------------------------ HELPER FUNCTIONS ------------------------------------
+def set_background():
+    # Inject custom CSS to set the airspace background styling
+    st.markdown("""
+        <style>
+        .black-background {
+            background-color: black;
+            position: fixed;
+            top: 20px;
+            left: 420px;
+            right: 20px;
+            bottom: 20px;
+            overflow: hidden;
+            border: 2px solid white;
+        }
+        </style>
+        <div class="black-background">
+        """, unsafe_allow_html=True
+    )
+
 def set_sidebar_width():
     # Inject custom CSS to set the width of the sidebar
     st.markdown(

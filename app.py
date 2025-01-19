@@ -23,6 +23,8 @@ def main():
     """   
     # Change the title and favicon of the app in the browser
     st.set_page_config(layout="wide", page_title='Flying High', page_icon=":airplane:")
+
+    set_background()
     
     # ---SIDEBAR---
     set_sidebar_width() # from helpers.py
@@ -31,9 +33,10 @@ def main():
     aircraft_nums = st.sidebar.text_input(
         "Aircraft numbers (separated by a comma): "
     )
-    speed = st.sidebar.slider("Speed", min_value=1, max_value=40, value=10, step=1)
+    speed = st.sidebar.slider("Speed", min_value=1, max_value=60, value=10, step=1)
     start = st.sidebar.button("Start", use_container_width=True)
     pause = st.sidebar.button("Pause", use_container_width=True)
+    reset = st.sidebar.button("Reset", use_container_width=True)
 
     
     # ---STATES---
@@ -63,6 +66,12 @@ def main():
             })
     if pause:
         st.session_state.paused = True
+
+    if reset:
+        st.session_state.running = False
+        st.session_state.paused = False
+        st.session_state.aircraft_data = pd.DataFrame(columns=["aircraft", "x", "y", "dx", "dy"])
+        st.session_state.aircraft_nums = ''
 
     
     # Create a container to update the airspace display
